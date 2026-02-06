@@ -25,7 +25,6 @@
         ├── index.css
         └── main.jsx
 ```
-Solution file: `LearningPlatform.sln` (root).
 
 ## 2. Component Breakdown
 - **Header**: brand, language display, simple sticky navigation.
