@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { AdminService } from "../services/api.js";
 import Loader from "../components/Loader.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
+import { useApp } from "../context/AppContext.jsx";
 
 const AdminDashboard = () => {
   const [overview, setOverview] = useState(null);
+  const { t } = useApp();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [subjectForm, setSubjectForm] = useState({ name: "", description: "", language: "hi" });
@@ -102,7 +104,7 @@ const AdminDashboard = () => {
   return (
     <div className="mx-auto max-w-5xl space-y-6 px-4 py-6">
       <div className="card space-y-1">
-        <h2 className="text-lg font-semibold">Admin Dashboard</h2>
+        <h2 className="text-lg font-semibold">{t("adminDashboard")}</h2>
         <p className="text-sm text-slate-500">Subjects, staff, courses और plans को मैनेज करें।</p>
       </div>
 

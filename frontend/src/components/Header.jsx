@@ -4,7 +4,7 @@ import { useApp } from "../context/AppContext.jsx";
 import { languageOptions } from "../data/languages.js";
 
 const Header = () => {
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const location = useLocation();
   const isAuthPage = ["/login", "/register", "/language-select"].includes(location.pathname);
   const languageLabel = useMemo(
@@ -15,13 +15,13 @@ const Header = () => {
   const unreadCount = state.notifications.filter((notification) => !notification.isRead).length;
 
   return (
-    <header className="sticky top-0 z-20 bg-white/95 shadow-sm backdrop-blur dark:bg-slate-900/95">
+    <header className="sticky top-0 z-20 bg-white/80 shadow-sm backdrop-blur-xl dark:bg-slate-900/80">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <Link to="/dashboard" className="flex items-center gap-2">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white">SL</span>
           <div>
-            <p className="text-lg font-semibold">Saathi Learn</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">साथी सीख</p>
+            <p className="text-lg font-semibold">{t("brandTitle")}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{t("brandSubtitle")}</p>
           </div>
         </Link>
         {!isAuthPage && (

@@ -6,7 +6,7 @@ import ErrorMessage from "../components/ErrorMessage.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { dispatch } = useApp();
+  const { dispatch, t } = useApp();
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -30,12 +30,12 @@ const Login = () => {
   return (
     <div className="mx-auto max-w-md space-y-6 px-4 py-6">
       <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-semibold">स्वागत है!</h1>
-        <p className="text-sm text-slate-500">फोन नंबर से लॉगिन करें</p>
+        <h1 className="text-2xl font-semibold">{t("loginWelcome")}</h1>
+        <p className="text-sm text-slate-500">{t("loginSubtitle")}</p>
       </div>
       <form className="space-y-4" onSubmit={handleLogin}>
         <div className="space-y-1">
-          <label className="label">मोबाइल नंबर</label>
+          <label className="label">{t("phoneLabel")}</label>
           <input
             className="input"
             type="tel"
@@ -45,7 +45,7 @@ const Login = () => {
           />
         </div>
         <div className="space-y-1">
-          <label className="label">पासवर्ड</label>
+          <label className="label">{t("passwordLabel")}</label>
           <input
             className="input"
             type="password"
@@ -56,11 +56,11 @@ const Login = () => {
         </div>
         {error && <ErrorMessage message={error} />}
         <button type="submit" className="primary-button">
-          {loading ? "लॉगिन हो रहा है..." : "लॉगिन करें"}
+          {loading ? "..." : t("loginAction")}
         </button>
       </form>
       <div className="text-center text-sm text-slate-500">
-        नया अकाउंट? <Link to="/register" className="font-semibold text-brand-600">रजिस्टर करें</Link>
+        {t("registerLink")}? <Link to="/register" className="font-semibold text-brand-600">रजिस्टर करें</Link>
       </div>
     </div>
   );

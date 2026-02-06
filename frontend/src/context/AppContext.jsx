@@ -1,12 +1,14 @@
 import { createContext, useContext, useEffect, useMemo, useReducer } from "react";
+import { deleteCookie, getCookie, setCookie } from "../utils/cookies.js";
+import { translations } from "../i18n/translations.js";
 
 const AppContext = createContext();
 
 const initialState = {
   user: null,
-  token: localStorage.getItem("token"),
-  language: localStorage.getItem("language") || "hi",
-  theme: localStorage.getItem("theme") || "light",
+  token: getCookie("token"),
+  language: getCookie("language") || "hi",
+  theme: getCookie("theme") || "light",
   courses: [],
   progress: {
     currentCourseId: null,
@@ -74,26 +76,28 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.token) {
-      localStorage.setItem("token", state.token);
+      setCookie("token", state.token);
     } else {
-      localStorage.removeItem("token");
+      deleteCookie("token");
     }
   }, [state.token]);
 
   useEffect(() => {
     if (state.language) {
-      localStorage.setItem("language", state.language);
+      setCookie("language", state.language);
     }
   }, [state.language]);
 
   useEffect(() => {
-    localStorage.setItem("theme", state.theme);
+    setCookie("theme", state.theme);
     document.documentElement.classList.toggle("dark", state.theme === "dark");
   }, [state.theme]);
 
   const value = useMemo(() => ({ state, dispatch }), [state]);
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  const t = (key, fallback) => translations[state.language]?.[key] || translations.en[key] || fallback || key;
+
+  return <AppContext.Provider value={{ ...value, t }}>{children}</AppContext.Provider>;
 };
 
 export const useApp = () => {

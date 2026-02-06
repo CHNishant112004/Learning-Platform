@@ -7,7 +7,7 @@ import ErrorMessage from "../components/ErrorMessage.jsx";
 import { CourseService, LiveSessionService, MembershipService } from "../services/api.js";
 
 const Dashboard = () => {
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [liveSessions, setLiveSessions] = useState([]);
@@ -50,15 +50,11 @@ const Dashboard = () => {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6">
-      <section className="card space-y-2">
+      <section className="glass-panel space-y-2">
         <h2 className="text-lg font-semibold">
-          {state.language === "hi" ? `नमस्ते, ${state.user?.name}!` : `Welcome, ${state.user?.name}!`}
+          {`${t("dashboardWelcome")}, ${state.user?.name}!`}
         </h2>
-        <p className="text-sm text-slate-500">
-          {state.language === "hi"
-            ? "आज थोड़ा-सा पढ़ें, धीरे-धीरे आगे बढ़ें।"
-            : "Study a little today, grow steadily."}
-        </p>
+        <p className="text-sm text-slate-500">{t("dashboardGreeting")}</p>
         <div className="flex flex-wrap gap-2 text-xs">
           <span className="rounded-full bg-brand-50 px-3 py-1 font-semibold text-brand-600">
             {membership?.planName || state.membership?.name || "Starter"}
@@ -70,7 +66,7 @@ const Dashboard = () => {
       </section>
 
       <section className="space-y-3">
-        <h3 className="section-title">क्विक एक्शन</h3>
+        <h3 className="section-title">{t("quickActions")}</h3>
         <div className="grid gap-3 sm:grid-cols-2">
           <Link to="/ai-explainer" className="card card-hover flex items-center justify-between">
             <div>
@@ -123,7 +119,7 @@ const Dashboard = () => {
 
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="section-title">जारी रखें</h3>
+          <h3 className="section-title">{t("continueLearning")}</h3>
           <Link to="/courses" className="text-sm font-semibold text-brand-600">
             सभी कोर्स
           </Link>
@@ -147,7 +143,7 @@ const Dashboard = () => {
       </section>
 
       <section className="space-y-3">
-        <h3 className="section-title">मेरे कोर्स</h3>
+        <h3 className="section-title">{t("myCourses")}</h3>
         {loading && <Loader />}
         {error && <ErrorMessage message={error} />}
         {!loading && !error && (
@@ -160,7 +156,7 @@ const Dashboard = () => {
       </section>
 
       <section className="space-y-3">
-        <h3 className="section-title">आने वाली लाइव कक्षाएँ</h3>
+        <h3 className="section-title">{t("upcomingLives")}</h3>
         {liveSessions.length === 0 ? (
           <div className="card text-sm text-slate-500">फिलहाल कोई लाइव क्लास नहीं है।</div>
         ) : (

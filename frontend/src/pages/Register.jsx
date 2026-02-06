@@ -6,7 +6,7 @@ import ErrorMessage from "../components/ErrorMessage.jsx";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const [form, setForm] = useState({ name: "", phone: "", city: "", password: "" });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,8 +39,8 @@ const Register = () => {
   return (
     <div className="mx-auto max-w-md space-y-6 px-4 py-6">
       <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-semibold">अपना खाता बनाएं</h1>
-        <p className="text-sm text-slate-500">कम डेटा में सरल सीखना शुरू करें</p>
+        <h1 className="text-2xl font-semibold">{t("registerTitle", "अपना खाता बनाएं")}</h1>
+        <p className="text-sm text-slate-500">{t("registerSubtitle", "कम डेटा में सरल सीखना शुरू करें")}</p>
       </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="space-y-1">
@@ -87,7 +87,7 @@ const Register = () => {
         </div>
         {error && <ErrorMessage message={error} />}
         <button type="submit" className="primary-button">
-          {loading ? "सेव हो रहा है..." : "आगे बढ़ें"}
+          {loading ? "..." : t("registerTitle", "आगे बढ़ें")}
         </button>
       </form>
       <div className="text-center text-sm text-slate-500">

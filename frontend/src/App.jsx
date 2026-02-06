@@ -40,6 +40,17 @@ const RequireRole = ({ children, role }) => {
   return children;
 };
 
+const RoleDashboard = () => {
+  const { state } = useApp();
+  if (state.user?.role === "Admin") {
+    return <AdminDashboard />;
+  }
+  if (state.user?.role === "Teacher") {
+    return <TeacherDashboard />;
+  }
+  return <Dashboard />;
+};
+
 const App = () => {
   const { state, dispatch } = useApp();
 
@@ -73,7 +84,7 @@ const App = () => {
             path="/dashboard"
             element={
               <RequireAuth>
-                <Dashboard />
+                <RoleDashboard />
               </RequireAuth>
             }
           />

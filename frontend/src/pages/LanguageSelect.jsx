@@ -1,20 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useApp } from "../context/AppContext.jsx";
 import { languageOptions } from "../data/languages.js";
+import api from "../services/api.js";
 
 const LanguageSelect = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const [query, setQuery] = useState("");
+  const [availableCodes, setAvailableCodes] = useState([]);
+
+  useEffect(() => {
+    api.get("/languages")
+      .then((response) => setAvailableCodes(response.data))
+      .catch(() => setAvailableCodes([]));
+  }, []);
 
   const filteredLanguages = useMemo(() => {
+    const source = availableCodes.length > 0
+      ? languageOptions.filter((language) => availableCodes.includes(language.code))
+      : languageOptions;
     if (!query) {
-      return languageOptions;
+      return source;
     }
     const lower = query.toLowerCase();
-    return languageOptions.filter((language) => language.label.toLowerCase().includes(lower));
-  }, [query]);
+    return source.filter((language) => language.label.toLowerCase().includes(lower));
+  }, [availableCodes, query]);
 
   const setLanguage = (language) => {
     dispatch({ type: "SET_LANGUAGE", payload: language });
@@ -24,8 +35,8 @@ const LanguageSelect = () => {
   return (
     <div className="mx-auto max-w-md space-y-6 px-4 py-6">
       <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-semibold">भाषा चुनें</h1>
-        <p className="text-sm text-slate-500">आप बाद में बदल सकते हैं</p>
+        <h1 className="text-2xl font-semibold">{t("languageSelectTitle")}</h1>
+        <p className="text-sm text-slate-500">{t("languageSelectSubtitle")}</p>
       </div>
       <div className="space-y-3">
         <input

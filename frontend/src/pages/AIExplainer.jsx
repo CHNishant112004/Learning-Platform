@@ -18,7 +18,7 @@ const sampleResponse = {
 };
 
 const AIExplainer = () => {
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const [input, setInput] = useState("");
   const [language, setLanguage] = useState(state.language);
   const [loading, setLoading] = useState(false);
@@ -50,9 +50,9 @@ const AIExplainer = () => {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6">
-      <div className="card space-y-3">
-        <h2 className="text-lg font-semibold">AI कॉन्सेप्ट एक्सप्लेनर</h2>
-        <p className="text-sm text-slate-500">अपने सवाल लिखें या नोट्स अपलोड करें</p>
+      <div className="glass-panel space-y-3">
+        <h2 className="text-lg font-semibold">{t("aiExplainerTitle")}</h2>
+        <p className="text-sm text-slate-500">{t("aiExplainerSubtitle")}</p>
         <textarea
           className="input min-h-[120px]"
           placeholder="उदाहरण: भौतिक विज्ञान में उबलना क्या है?"
@@ -74,7 +74,7 @@ const AIExplainer = () => {
           <input className="input" type="file" accept=".pdf,.txt" />
         </div>
         <button type="button" onClick={handleExplain} className="primary-button">
-          सरल समझाएं
+          {t("explainSimply")}
         </button>
       </div>
 

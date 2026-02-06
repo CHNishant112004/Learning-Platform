@@ -1,12 +1,14 @@
 import axios from "axios";
+import { getCookie } from "../utils/cookies.js";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5001/api",
-  timeout: 10000
+  timeout: 10000,
+  withCredentials: true
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = getCookie("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

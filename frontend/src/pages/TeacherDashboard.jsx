@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { TeacherService } from "../services/api.js";
 import Loader from "../components/Loader.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
+import { useApp } from "../context/AppContext.jsx";
 
 const TeacherDashboard = () => {
   const [overview, setOverview] = useState(null);
@@ -9,6 +10,8 @@ const TeacherDashboard = () => {
   const [error, setError] = useState(null);
   const [liveForm, setLiveForm] = useState({ lectureId: "" });
   const [noteForm, setNoteForm] = useState({ lectureId: "", title: "", fileUrl: "", summary: "" });
+
+  const { t } = useApp();
 
   const refresh = () => {
     setLoading(true);
@@ -53,7 +56,7 @@ const TeacherDashboard = () => {
   return (
     <div className="mx-auto max-w-5xl space-y-6 px-4 py-6">
       <div className="card space-y-1">
-        <h2 className="text-lg font-semibold">Teacher Dashboard</h2>
+        <h2 className="text-lg font-semibold">{t("teacherDashboard")}</h2>
         <p className="text-sm text-slate-500">Live sessions शुरू करें और नोट्स साझा करें।</p>
       </div>
 

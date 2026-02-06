@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { LiveSessionService } from "../services/api.js";
 import Loader from "../components/Loader.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
+import { useApp } from "../context/AppContext.jsx";
 
 const LiveSessions = () => {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { t } = useApp();
 
   useEffect(() => {
     setLoading(true);
@@ -25,7 +27,7 @@ const LiveSessions = () => {
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6">
       <div className="card space-y-1">
-        <h2 className="text-lg font-semibold">लाइव क्लासेस</h2>
+        <h2 className="text-lg font-semibold">{t("live")}</h2>
         <p className="text-sm text-slate-500">अपने टीचर के साथ लाइव पढ़ाई करें।</p>
       </div>
 

@@ -1,18 +1,17 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext.jsx";
 
-const navItems = [
-  { to: "/dashboard", label: "होम", icon: "🏠" },
-  { to: "/courses", label: "कोर्स", icon: "📚" },
-  { to: "/live", label: "लाइव", icon: "📺" },
-  { to: "/notebook", label: "AI नोट्स", icon: "🧠" },
-  { to: "/profile", label: "प्रोफ़ाइल", icon: "👤" }
-];
-
 const BottomNav = () => {
-  const { state } = useApp();
+  const { state, t } = useApp();
   const location = useLocation();
   const isAuthPage = ["/login", "/register", "/language-select"].includes(location.pathname);
+  const navItems = [
+    { to: "/dashboard", label: t("home"), icon: "🏠" },
+    { to: "/courses", label: t("courses"), icon: "📚" },
+    { to: "/live", label: t("live"), icon: "📺" },
+    { to: "/notebook", label: t("notebook"), icon: "🧠" },
+    { to: "/profile", label: t("profile"), icon: "👤" }
+  ];
 
   if (!state.token || isAuthPage) {
     return null;

@@ -25,6 +25,7 @@
         ├── index.css
         └── main.jsx
 ```
+Solution file: `LearningPlatform.sln` (root).
 
 ## 2. Component Breakdown
 - **Header**: brand, language display, simple sticky navigation.
@@ -44,6 +45,7 @@
 ## 4. Sample API Service Setup
 - Central Axios client with JWT auth: `frontend/src/services/api.js`.
 - Example endpoints: `/auth/login`, `/courses`, `/ai/explain`, `/live-sessions`, `/notebook/query`.
+- Frontend auth state (token/language/theme) is persisted in cookies instead of localStorage.
 
 ## 4.1 API Endpoints (Backend)
 - `POST /api/auth/register` → create user and get JWT
@@ -85,6 +87,7 @@
   - Admin: `9000000001` / `Admin@123`
   - Teacher: `9000000002` / `Teacher@123`
   - Student: `9000000003` / `Student@123`
+- SQL bootstrap script: `backend/database.sql` (creates tables if missing).
 
 ---
 

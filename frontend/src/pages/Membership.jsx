@@ -5,7 +5,7 @@ import Loader from "../components/Loader.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 
 const Membership = () => {
-  const { dispatch } = useApp();
+  const { dispatch, t } = useApp();
   const [plans, setPlans] = useState([]);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const Membership = () => {
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6">
       <div className="card space-y-1">
-        <h2 className="text-lg font-semibold">Membership Plans</h2>
+        <h2 className="text-lg font-semibold">{t("membershipTitle")}</h2>
         <p className="text-sm text-slate-500">अपनी पढ़ाई के लिए सही प्लान चुनें।</p>
       </div>
 

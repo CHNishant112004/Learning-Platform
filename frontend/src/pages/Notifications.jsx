@@ -6,7 +6,7 @@ import Loader from "../components/Loader.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 
 const Notifications = () => {
-  const { state, dispatch } = useApp();
+  const { state, dispatch, t } = useApp();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -45,7 +45,7 @@ const Notifications = () => {
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-6">
       <div className="card space-y-1">
-        <h2 className="text-lg font-semibold">Notifications</h2>
+        <h2 className="text-lg font-semibold">{t("notificationsTitle")}</h2>
         <p className="text-sm text-slate-500">नई अपडेट्स यहाँ दिखेंगी।</p>
       </div>
 
